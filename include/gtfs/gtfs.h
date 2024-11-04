@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <unordered_map>
 
 #include "utils/types.h"
 
@@ -31,4 +32,38 @@ private:
 
   // Type: Email, Optional
   std::string agency_email;
+};
+
+enum ErrorCode {
+  OK,
+  ERROR,
+};
+
+class Result {
+public:
+  Result();
+
+  bool IsSuccess();
+
+  ErrorCode GetErrorCode();
+
+private:
+};
+
+class GTFSFeed {
+public:
+  GTFSFeed(std::string directory);
+
+  /**
+   * @brief Reads GTFS files from directory provided.
+   *
+   * @return Result - Contains information about the result of reading GTFS
+   * data.
+   */
+  Result read_gtfs();
+
+  const Agency& get_agency(const std::string agency_id);
+
+private:
+  std::unordered_map<std::string, Agency> agencies;
 };
