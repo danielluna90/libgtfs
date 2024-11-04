@@ -23,3 +23,13 @@ Longitude::Longitude(float f) : Type(f) {}
  * @return false - Otherwise
  */
 bool Longitude::IsValid() { return -180.0f <= data && data <= 180.0f; }
+
+URL::URL(std::string str) : Type(str) {}
+
+/**
+ * @brief Checks if URL is valid.
+ *
+ * @return true - If URL follows format:
+ * @return false - Otherwise
+ */
+bool URL::IsValid() { return true; }

@@ -24,7 +24,11 @@ public:
   ErrorCode GetErrorCode() const { return error; }
 
   const std::string ToString() const;
-  friend std::ostream& operator<<(std::ostream& os, const Result& res);
+  friend std::ostream& operator<<(std::ostream& os, const Result& res) {
+    os << res.ToString();
+
+    return os;
+  }
 
 private:
   const std::string StatusCodeToString() const;

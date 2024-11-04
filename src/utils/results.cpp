@@ -1,4 +1,4 @@
-#include "utils/results.h"
+#include "gtfs/utils/results.h"
 
 Result::Result(const StatusCode code)
     : code(code), error(ErrorCode::NOT_AVAILABLE) {}
@@ -34,10 +34,4 @@ const std::string Result::ToString() const {
   if (code == StatusCode::ERROR) res += ", Error Code: " + ErrorCodeToString();
 
   return res;
-}
-
-std::ostream& operator<<(std::ostream& os, const Result& res) {
-  os << res.ToString();
-
-  return os;
 }

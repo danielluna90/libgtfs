@@ -2,8 +2,11 @@
 
 #include <string>
 
+#include "gtfs/utils/datasets.h"
+#include "gtfs/utils/types.h"
+
 // From https://gtfs.org/documentation/schedule/reference/#agencytxt
-class Agency {
+class Agency : public Dataset {
 public:
 private:
   // Type: Unique ID, Conditionally Required
@@ -13,7 +16,7 @@ private:
   std::string agency_name;
 
   // Type: URL, Required
-  std::string agency_url;
+  URL agency_url;
 
   // Type: Timezone, Required
   std::string agency_timezone;
@@ -25,7 +28,7 @@ private:
   std::string agency_phone;
 
   // Type: URL, Optional
-  std::string agency_fare_url;
+  URL agency_fare_url;
 
   // Type: Email, Optional
   std::string agency_email;

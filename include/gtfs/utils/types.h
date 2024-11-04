@@ -65,3 +65,14 @@ public:
 
   bool IsValid();
 };
+
+/**
+ * @brief
+ *
+ */
+class URL : public Type<std::string> {
+public:
+  URL(std::string str);
+
+  bool IsValid();
+};
