@@ -4,62 +4,9 @@
 #include <string>
 #include <unordered_map>
 
+#include "datasets/agency.h"
+#include "utils/results.h"
 #include "utils/types.h"
-
-// From https://gtfs.org/documentation/schedule/reference/#agencytxt
-class Agency {
-public:
-private:
-  // Type: Unique ID, Conditionally Required
-  std::string agency_id;
-
-  // Type: Text, Required
-  std::string agency_name;
-
-  // Type: URL, Required
-  std::string agency_url;
-
-  // Type: Timezone, Required
-  std::string agency_timezone;
-
-  // Type: Language Code, Optional
-  std::string agency_language;
-
-  // Type: Phone Number, Optional
-  std::string agency_phone;
-
-  // Type: URL, Optional
-  std::string agency_fare_url;
-
-  // Type: Email, Optional
-  std::string agency_email;
-};
-
-enum StatusCode {
-  OK,
-  ERROR,
-};
-
-enum ErrorCode {
-  NOT_AVAILABLE,
-
-  PATH_NOT_DIRECTORY,
-  REQUIRED_FILE_MISSING
-};
-
-class Result {
-public:
-  explicit Result(const StatusCode code);
-  explicit Result(const StatusCode code, const ErrorCode error);
-
-  bool IsSuccess() { return code == StatusCode::OK; }
-
-  ErrorCode GetErrorCode() { return error; }
-
-private:
-  StatusCode code;
-  ErrorCode error;
-};
 
 class GTFSFeed {
 public:
@@ -78,7 +25,7 @@ public:
    */
   Result read_gtfs();
 
-  const Agency& get_agency(const std::string agency_id);
+  const Agency& get_agency(const std::string agency_id) const;
 
 private:
   std::filesystem::path gtfs_path;

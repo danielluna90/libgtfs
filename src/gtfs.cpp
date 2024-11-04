@@ -2,12 +2,6 @@
 
 #include <iostream>
 
-Result::Result(const StatusCode code)
-    : code(code), error(ErrorCode::NOT_AVAILABLE) {}
-
-Result::Result(const StatusCode code, const ErrorCode error)
-    : code(code), error(error) {}
-
 GTFSFeed::GTFSFeed(const std::filesystem::path& path) : gtfs_path(path) {}
 
 Result GTFSFeed::read_gtfs() {
