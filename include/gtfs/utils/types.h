@@ -7,7 +7,7 @@
  * href="https://gtfs.org/documentation/schedule/reference/#field-types">GTFS
  * Field Type</a>.
  *
- * @tparam T Type of the raw data which should be held and verified.
+ * @tparam T - Type of the raw data which should be held and verified.
  */
 template <typename T>
 class Type {

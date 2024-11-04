@@ -1,5 +1,6 @@
 #pragma once
 
+#include <filesystem>
 #include <string>
 #include <unordered_map>
 
@@ -34,25 +35,40 @@ private:
   std::string agency_email;
 };
 
-enum ErrorCode {
+enum StatusCode {
   OK,
   ERROR,
 };
 
+enum ErrorCode {
+  NOT_AVAILABLE,
+
+  PATH_NOT_DIRECTORY,
+  REQUIRED_FILE_MISSING
+};
+
 class Result {
 public:
-  Result();
+  explicit Result(const StatusCode code);
+  explicit Result(const StatusCode code, const ErrorCode error);
 
-  bool IsSuccess();
+  bool IsSuccess() { return code == StatusCode::OK; }
 
-  ErrorCode GetErrorCode();
+  ErrorCode GetErrorCode() { return error; }
 
 private:
+  StatusCode code;
+  ErrorCode error;
 };
 
 class GTFSFeed {
 public:
-  GTFSFeed(std::string directory);
+  /**
+   * @brief Construct a new GTFSFeed object.
+   *
+   * @param path - Sets the path for the directory containing the GTFS data.
+   */
+  explicit GTFSFeed(const std::filesystem::path& path);
 
   /**
    * @brief Reads GTFS files from directory provided.
@@ -65,5 +81,7 @@ public:
   const Agency& get_agency(const std::string agency_id);
 
 private:
+  std::filesystem::path gtfs_path;
+
   std::unordered_map<std::string, Agency> agencies;
 };

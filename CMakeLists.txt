@@ -12,4 +12,5 @@ target_include_directories(gtfs PRIVATE include)
 add_subdirectory(external/Catch2)
 
 add_executable(gtfs-tests tests/test.cpp)
-target_link_libraries(gtfs-tests PRIVATE Catch2::Catch2WithMain)
+target_link_libraries(gtfs-tests PRIVATE Catch2::Catch2WithMain gtfs)
+target_include_directories(gtfs-tests PRIVATE include)
